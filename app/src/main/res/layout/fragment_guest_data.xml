@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.GuestDataViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        >
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/full_logo"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Introduzca los datos de la visita"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src='@{viewModel.visitType.equalsIgnoreCase("SPORADIC") ? @drawable/truck: @drawable/guy}'
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="60"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingTop="15dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cedula de Identidad"
+                    android:inputType="number"
+                    android:text="@={viewModel.cedula}"
+                    android:visibility='@{viewModel.visitType.equalsIgnoreCase("SPORADIC") ? View.GONE: View.VISIBLE}' />
+                <EditText
+                    android:id="@+id/nameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint='@{viewModel.visitType.equalsIgnoreCase("SPORADIC") ? "Nombre de la Empresa": "Nombre y Apellido"}'
+                    android:text="@={viewModel.name}"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Horario"
+            android:textAlignment="center"
+            android:visibility='@{viewModel.visitType.equalsIgnoreCase("SPORADIC") ? View.GONE: View.VISIBLE}'
+            android:layout_marginBottom="2dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility='@{viewModel.visitType.equalsIgnoreCase("SCHEDULED") ? View.VISIBLE: View.GONE}'>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.day}"
+                style="@style/VisitMeButtonText"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:onClick="@{viewModel::selectDay}"
+                />
+            <android.support.v7.widget.AppCompatSpinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/dayParts"
+                android:selectedItemPosition="@={viewModel.partOfDay}"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Acompañantes"
+                android:inputType="number"
+                android:text="@={viewModel.companions}">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility='@{viewModel.visitType.equalsIgnoreCase("FREQUENT") ? View.VISIBLE: View.GONE}'
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/intervals"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="@color/white"
+                android:text="Modificar"
+                style="@style/VisitMeButton"
+                android:onClick="@{viewModel::modifyIntervals}"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/button"
+            style="@style/VisitMeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::register}"
+            android:text="Registrar"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+
+</layout>
+

@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "gil.mota.visitme.visitmesecurity"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                onesignal_app_id               : '3448c128-41d1-4813-a70f-14cb2ea55e9f',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.otaliastudios:autocomplete:1.1.0'
+    compile 'com.android.volley:volley:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compile('org.apache.httpcomponents:httpmime:4.3.5') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:support-v4:25.3.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.x.x'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.onesignal:OneSignal:3.8.4'
+    compile 'com.github.ganfra:material-spinner:2.0.0'
+    compile 'in.shadowfax:proswipebutton:1.1'
+    compile 'com.wdullaer:materialdatetimepicker:3.5.1'
+    compile 'com.xiaofeng.android:flowlayoutmanager:1.2.3.2'
+    compile 'com.android.support:recyclerview-v7:26.3.1'
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
+
+}

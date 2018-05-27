@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="30dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Emitir una Alerta"
+        android:textColor="#333"
+        android:textSize="24sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Antes de emitir una alerta, verifica que la informacion sea correcta; evitando dar falsos testimonios."    />
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/community"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ms_enableFloatingLabel="false"
+        app:ms_hint="Selecciona la comunidad"
+        />
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ms_hint="Selecciona el tipo de Alerta"
+        app:ms_enableFloatingLabel="false"
+        android:visibility="gone"
+        />
+
+
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mensaje"
+        style="@style/VisitMeField"/>
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripcion"
+        android:ems="20"
+        style="@style/VisitMeField"/>
+</LinearLayout>

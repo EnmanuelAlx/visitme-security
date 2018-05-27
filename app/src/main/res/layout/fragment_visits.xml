@@ -1,0 +1,72 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.VisitsViewModel"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    style="@style/VisitMeButtonText"
+                    android:textSize="16sp"
+                    android:text="Ingresa el Numero de Identificacion, el nombre de la empresa, o el correo electronico para validar que el visitante esta invitado"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Numero de Identificacion"
+                    android:inputType="number"
+                    android:text="@={viewModel.identification}" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre de la Empresa"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.name}" />
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo Electronico"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}" />
+
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:text="Buscar"
+                    style="@style/VisitMeButton"
+                    android:onClick="@{viewModel::find}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

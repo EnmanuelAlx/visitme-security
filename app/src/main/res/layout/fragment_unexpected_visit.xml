@@ -1,0 +1,138 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.UnexpectedVisitViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="El visitante debe solicitar Acceso"
+                    android:textSize="22sp" />
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="Datos del Visitante"
+                    android:textSize="18sp" />
+
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Nombre"
+                    android:text="@={viewModel.name}" />
+
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Numero de Identificacion"
+                    android:text="@={viewModel.identification}" />
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Fotos"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:onClick="@{viewModel::addPhoto}"
+                        android:src="@mipmap/plus" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp">
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="Datos del Residente"
+                    android:textSize="18sp" />
+
+
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Nombre"
+                    android:text="@={viewModel.residentName}" />
+
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Numero de Identificacion"
+                    android:text="@={viewModel.residentIdentification}" />
+
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Numero de Casa / Oficina"
+                    android:text="@={viewModel.residentDetail}" />
+
+                <Button
+                    style="@style/VisitMeButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:onClick="@{viewModel::requestAccess}"
+                    android:text="Solicitar Acceso"
+                    android:textColor="@color/white"
+
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

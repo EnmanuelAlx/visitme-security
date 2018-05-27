@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.RegisterViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <RelativeLayout
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="@{viewModel::selectImage}">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/profile_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/guy"
+                        app:civ_border_color="@color/colorPrimaryDark"
+                        app:civ_border_width="4dp"
+                        android:onClick="@{viewModel::selectImage}"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/blue_circle"
+                        android:padding="5dp"
+                        android:src="@drawable/camera" />
+                </RelativeLayout>
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:text="@={viewModel.name}"
+                    android:hint="Nombre y Apellido"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="Correo Electronico"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="Cedula de Identidad"
+                    android:inputType="number"
+                    android:text="@={viewModel.cedula}" />
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="Telefono Celular"
+                    android:inputType="phone"
+                    android:text="@={viewModel.cellPhone}" />
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="Telefono De Casa"
+                    android:inputType="phone"
+                    android:text="@={viewModel.homePhone}" />
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.password}"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    style="@style/VisitMeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="@={viewModel.confirmPassword}"
+                    android:ems="10"
+                    android:hint="Confirmar Contraseña"
+                    android:inputType="textPassword" />
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/VisitMeButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel.edit ? viewModel::editProfile : viewModel::register}"
+                    android:layout_marginBottom="15dp"
+                    android:text='@{viewModel.edit ? "Editar" : "Registrarse"}'
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.edit ? View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Al registrarte, aceptas nuestros "
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        style="@style/VisitMeButtonText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="terminos y condiciones"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+
+</layout>
+

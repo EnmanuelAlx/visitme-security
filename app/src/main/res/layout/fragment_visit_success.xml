@@ -1,0 +1,137 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.VisitSuccessViewModel"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:padding="15dp">
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:text="Acceso de Entrada concedido a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/guestImage"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:padding="10dp"
+                        android:src='@drawable/guy' />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp">
+                        <TextView
+                            style="@style/VisitMeButtonText"
+                            android:textSize="18sp"
+                            android:layout_margin="3dp"
+                            android:hint="Nombre"
+                            android:text="@={viewModel.name}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/VisitMeButtonText"
+                            android:textSize="18sp"
+                            android:layout_margin="3dp"
+                            android:hint="Numero de Identificacion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.identification}"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/VisitMeButtonText"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:text="Por"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/residentImage"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:padding="10dp"
+                        android:src='@drawable/guy' />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp">
+                        <TextView
+                            style="@style/VisitMeButtonText"
+                            android:textSize="18sp"
+                            android:layout_margin="3dp"
+                            android:hint="Nombre"
+                            android:text="@={viewModel.residentName}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/VisitMeButtonText"
+                            android:textSize="18sp"
+                            android:layout_margin="3dp"
+                            android:hint="Numero de Identificacion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.residentDetail}"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:text="Aceptar"
+                    style="@style/VisitMeButton"
+                    android:onClick="@{viewModel::aceptar}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

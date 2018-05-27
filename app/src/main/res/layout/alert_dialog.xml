@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/guy"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="0dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pedro Perez"
+        android:textAlignment="center"
+        android:textColor="#333"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Texto muy largo donde va la fecha y hora del sucesso"
+        android:textAlignment="center"
+        android:textColor="@color/gray_4"
+        android:textSize="14sp"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Robo en Manzana 14"
+        android:textSize="18sp"
+        android:textColor="#333"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Texto muy largo donde va la descripcion larga de lo que sucedio, deberia tener varias lineas para verse mejor y entenderse mejor..."
+
+        android:textColor="@color/gray_4"
+        android:textSize="14sp"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>

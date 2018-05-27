@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="gil.mota.visitme.visitmesecurity.viewModels.ItemIntervalViewModel"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="100">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/days"
+            android:selectedItemPosition="@={viewModel.daySelected}"
+            android:layout_weight="10"
+            android:onItemSelected="@{viewModel::onDaySelected}"
+            />
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:textSize="18sp"
+            android:singleLine="true"
+            style="@style/VisitMeButtonText"
+            android:text="@{viewModel.from}"
+            android:tag="from"
+            android:onClick="@{viewModel::changeTime}"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "/>
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:singleLine="true"
+            android:textSize="18sp"
+            style="@style/VisitMeButtonText"
+            android:text="@{viewModel.to}"
+            android:tag="to"
+            android:onClick="@{viewModel::changeTime}"/>
+
+        <ImageButton
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:onClick="@{viewModel::remove}"
+            android:src="@drawable/ic_cancel_full_24dp" />
+    </LinearLayout>
+</layout>
+

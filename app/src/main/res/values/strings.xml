@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Visit Me Security!</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_splash">Visit Me Security!</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_code">CodeActivity</string>
+    <string name="title_activity_create_visit">CreateVisitActivity</string>
+
+    <string-array name="meridian">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mie</item>
+        <item>Jue</item>
+        <item>Vie</item>
+        <item>Sab</item>
+        <item>Dom</item>
+    </string-array>
+
+    <string-array name="dayParts">
+        <item>Mañana</item>
+        <item>Tarde</item>
+        <item>Noche</item>
+    </string-array>
+
+    <string name="title_activity_unexpected_visitor">UnexpectedVisitorActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+
+
+</resources>
