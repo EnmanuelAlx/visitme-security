@@ -45,10 +45,9 @@ public class PageAdapter extends FragmentStatePagerAdapter implements FragmentPa
         unexpectedVisit.setPager(this);
     }
 
-    //Overriding method getItem
+
     @Override
     public Fragment getItem(int position) {
-        Log.i("VISIT FLOW","GET ITEM " + position + " " + visitFragmentSelected);
         switch (position) {
             case 0:
                 return getVisitFragmentSelected();
@@ -76,7 +75,6 @@ public class PageAdapter extends FragmentStatePagerAdapter implements FragmentPa
             default:
                 return visits;
         }
-
     }
 
     //Overriden method getCount to get the number of tabs
@@ -87,7 +85,6 @@ public class PageAdapter extends FragmentStatePagerAdapter implements FragmentPa
 
     @Override
     public void changePage(int page) {
-        Log.i("VISIT FLOW", "CHANGING PAGE TO " + page);
         this.visitFragmentSelected = page;
         this.notifyDataSetChanged();
     }
@@ -99,5 +96,7 @@ public class PageAdapter extends FragmentStatePagerAdapter implements FragmentPa
     }
 
 
-
+    public int getCurrentPage() {
+        return visitFragmentSelected;
+    }
 }

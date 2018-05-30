@@ -205,6 +205,6 @@ public class RequestManager {
     public Observable<JSONObject> markVisitAsCheck(String visit) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("visit", visit);
-        return request(Request.Method.POST, urlBase + Urls.MARK_VISIT_AS_CHECKED, obj);
+        return request(Request.Method.POST, urlBase + Urls.MARK_VISIT_AS_CHECKED.replace(":visit",visit), obj);
     }
 }

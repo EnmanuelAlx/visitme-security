@@ -40,8 +40,8 @@ public class VisitSuccessFragment extends Fragment implements VisitSuccessViewMo
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_visit_success, container, false);
-        visit = getArguments().getParcelable("visit");
-        viewModel = new VisitSuccessViewModel(this, visit);
+        //visit = getArguments().getParcelable("visit");
+        viewModel = new VisitSuccessViewModel(this);
         binding.setViewModel(viewModel);
         return binding.getRoot();
 

@@ -89,7 +89,6 @@ public class MainActivity extends BindeableActivity implements TabLayout.OnTabSe
             pager.setCurrentItem(tab.getPosition());
             lastTab = tab;
         }
-
     }
 
     @Override
@@ -137,12 +136,13 @@ public class MainActivity extends BindeableActivity implements TabLayout.OnTabSe
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private Visit createVisitFromData(Intent data) {
-        return data.getParcelableExtra("visit");
-    }
 
     @Override
     public void onBackPressed() {
-        viewModel.signOut();
+
+        if(this.tabLayout.getSelectedTabPosition() != 0 || this.adapter.getCurrentPage() == 0)
+            viewModel.signOut();
+        else
+            this.adapter.changePage(0);
     }
 }

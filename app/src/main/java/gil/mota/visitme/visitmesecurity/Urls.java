@@ -24,5 +24,5 @@ public class Urls
     public static final String CHANGE_PASSWORD = "/forgotPassword/changePassword";
     public static final String COMPANIES = "/companies";
     public static final String FIND_VISITS = "/communities/:community/shouldEnter";
-    public static final String MARK_VISIT_AS_CHECKED = VISITS + "/markAsChecked";
+    public static final String MARK_VISIT_AS_CHECKED = VISITS + "/:visit/checkIn";
 }

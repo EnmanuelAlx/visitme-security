@@ -59,7 +59,7 @@ public class SelectCommunityDialog {
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        result.onSelectCommunity((Community) community.getSelectedItem());
+                        result.onSelectCommunity(communities.get(community.getSelectedItemPosition()));
                         d.dismiss();
                     }
                 });

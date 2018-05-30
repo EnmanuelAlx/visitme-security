@@ -12,9 +12,8 @@ public class VisitSuccessViewModel extends Observable {
     private Visit visit;
     public ObservableField<String> name, residentName, residentDetail, identification;
 
-    public VisitSuccessViewModel(Contract contract, Visit visit) {
+    public VisitSuccessViewModel(Contract contract) {
         this.contract = contract;
-        this.visit = visit;
         name = new ObservableField<>("");
         residentName = new ObservableField<>("");
         residentDetail = new ObservableField<>("");
@@ -24,12 +23,14 @@ public class VisitSuccessViewModel extends Observable {
 
     public void setVisit(Visit visit) {
         this.visit = visit;
-        name.set(visit.getGuest().getName());
-        residentName.set(visit.getResident().getName());
-        identification.set(visit.getGuest().getIdentification());
-        residentDetail.set("????");
-        contract.changeImageGuest(visit.getGuest().getImage());
-        contract.changeImageResident(visit.getResident().getImage());
+        if (visit != null) {
+            name.set(visit.getGuest().getName());
+            residentName.set(visit.getResident().getName());
+            identification.set(visit.getGuest().getIdentification());
+            residentDetail.set("????");
+            contract.changeImageGuest(visit.getGuest().getImage());
+            contract.changeImageResident(visit.getResident().getImage());
+        }
     }
 
     public void aceptar(View view) {

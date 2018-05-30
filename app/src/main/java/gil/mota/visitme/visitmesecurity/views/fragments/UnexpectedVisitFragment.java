@@ -56,4 +56,6 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
             Pnotify.makeText(getActivity(),"Solicitud Enviada satisfactoriamente, en espera de respuesta", Toast.LENGTH_SHORT, Pnotify.INFO).show();
         }
     }
+
+
 }
