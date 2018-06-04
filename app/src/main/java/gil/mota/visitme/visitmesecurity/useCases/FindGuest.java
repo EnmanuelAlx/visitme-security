@@ -49,7 +49,6 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     @Override
     public void onNext(JSONObject obj) {
-        Log.i("VISIT FLOW","VISIT "+ obj.toString());
         if(obj.has("id"))
         {
             markVisitAsChecked(obj);
@@ -61,7 +60,6 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     private void markVisitAsChecked(JSONObject obj) {
         try {
-            Log.i("VISIT FLOW","MARK AS CHECKED "+ obj.toString());
             MarkVisitAsCheck subUseCase = new MarkVisitAsCheck(this);
             subUseCase.setVisit(obj.getString("id"));
             subUseCase.run();

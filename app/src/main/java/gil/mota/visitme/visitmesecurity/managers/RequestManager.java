@@ -196,15 +196,24 @@ public class RequestManager {
 
     public Observable<JSONObject> findGuest(String community, String identification, String email, String name) throws JSONException {
         JSONObject obj = new JSONObject();
-        obj.put("email",email);
-        obj.put("identification",identification);
-        obj.put("name",name);
+        obj.put("email", email);
+        obj.put("identification", identification);
+        obj.put("name", name);
         return request(Request.Method.POST, urlBase + Urls.FIND_VISITS.replace(":community", community), obj);
     }
 
     public Observable<JSONObject> markVisitAsCheck(String visit) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("visit", visit);
-        return request(Request.Method.POST, urlBase + Urls.MARK_VISIT_AS_CHECKED.replace(":visit",visit), obj);
+        return request(Request.Method.POST, urlBase + Urls.MARK_VISIT_AS_CHECKED.replace(":visit", visit), obj);
+    }
+
+    public Observable<JSONObject> requestAccess(HashMap<String, String> params,
+                                                HashMap<String, String> photos,
+                                                String community) {
+
+        return multipartRequest(Request.Method.POST,
+                urlBase + Urls.REQUEST_ACCESS.replace(":community", community)
+                , params, photos, null, null);
     }
 }

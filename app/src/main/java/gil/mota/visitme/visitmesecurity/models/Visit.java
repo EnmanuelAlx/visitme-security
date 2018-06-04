@@ -28,6 +28,7 @@ public class Visit implements Parcelable {
     private Community community;
     private String partOfDay;
     private Interval[] intervals;
+    private String reference;
 
     protected Visit(Parcel in) {
         _id = in.readString();
@@ -226,5 +227,9 @@ public class Visit implements Parcelable {
 
     public void setPartOfDay(String partOfDay) {
         this.partOfDay = partOfDay;
+    }
+
+    public String getReference() {
+        return reference;
     }
 }

@@ -27,7 +27,7 @@ public class VisitSuccessViewModel extends Observable {
             name.set(visit.getGuest().getName());
             residentName.set(visit.getResident().getName());
             identification.set(visit.getGuest().getIdentification());
-            residentDetail.set("????");
+            residentDetail.set(visit.getReference());
             contract.changeImageGuest(visit.getGuest().getImage());
             contract.changeImageResident(visit.getResident().getImage());
         }

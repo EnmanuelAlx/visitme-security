@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:hint="Numero de Identificacion"
+                    android:inputType="number"
                     android:text="@={viewModel.identification}" />
 
                 <TextView
@@ -100,15 +101,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:hint="Nombre"
-                    android:text="@={viewModel.residentName}" />
-
-                <EditText
-                    style="@style/VisitMeButtonText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
                     android:hint="Numero de Identificacion"
+                    android:inputType="number"
                     android:text="@={viewModel.residentIdentification}" />
 
                 <EditText
@@ -132,7 +126,23 @@
 
             </LinearLayout>
         </ScrollView>
-
+        <RelativeLayout
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCFFFFFF"
+            android:visibility="gone"
+            >
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:layout_centerInParent="true"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.CubeGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorAccent" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </layout>
