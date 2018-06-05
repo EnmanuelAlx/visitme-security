@@ -11,12 +11,12 @@ import android.view.WindowManager;
 
 import gil.mota.visitme.visitmesecurity.R;
 
-public class UnexpectedVisitorActivity extends AppCompatActivity {
+public class VisitAccessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unexpected_visitor);
+        setContentView(R.layout.fragment_visit_success);
         String data = getIntent().getStringExtra("data");
         Log.i("UNEXPECTED!","DATA:" + data);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
@@ -26,8 +26,6 @@ public class UnexpectedVisitorActivity extends AppCompatActivity {
                              WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
     }
 
-
-
-
-
+    //TODO FILL WITH GUEST DATA!
+    
 }

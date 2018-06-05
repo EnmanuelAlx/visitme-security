@@ -119,15 +119,15 @@
                 </LinearLayout>
 
                 <Button
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/white"
-                    android:text="Aceptar"
+                    android:id="@+id/aceptar"
                     style="@style/VisitMeButton"
-                    android:onClick="@{viewModel::aceptar}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="@{viewModel::aceptar}"
+                    android:text="Aceptar"
 
-                    />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
         </ScrollView>

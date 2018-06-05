@@ -80,8 +80,8 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     @Override
     public void close() {
         if (pager != null) {
+            Pnotify.makeText(MyApplication.getInstance(),"Solicitud Enviada satisfactoriamente, en espera de respuesta", Toast.LENGTH_SHORT, Pnotify.INFO).show();
             pager.changePage(0);
-            Pnotify.makeText(getActivity(),"Solicitud Enviada satisfactoriamente, en espera de respuesta", Toast.LENGTH_SHORT, Pnotify.INFO).show();
         }
     }
 

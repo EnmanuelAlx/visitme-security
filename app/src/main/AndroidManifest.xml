@@ -39,7 +39,7 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".views.activities.UnexpectedVisitorActivity"
+            android:name=".views.activities.VisitAccessActivity"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_unexpected_visitor"
             android:launchMode="singleTask"

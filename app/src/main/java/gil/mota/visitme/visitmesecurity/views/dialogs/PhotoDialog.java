@@ -36,9 +36,11 @@ public class PhotoDialog {
 
         fillView(viewInflated);
 
-        dialog = builder.show();
+        dialog = builder.create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+
     }
 
     private void fillView(View view) {

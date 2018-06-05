@@ -1,15 +1,10 @@
 package gil.mota.visitme.visitmesecurity.managers;
 
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.onesignal.NotificationExtenderService;
-import com.onesignal.OSNotificationDisplayedResult;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OSNotificationReceivedResult;
 import com.onesignal.OneSignal;
@@ -17,16 +12,11 @@ import com.onesignal.OneSignal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
-import java.math.BigInteger;
-
 import gil.mota.visitme.visitmesecurity.R;
-import gil.mota.visitme.visitmesecurity.models.Community;
-import gil.mota.visitme.visitmesecurity.models.User;
 import gil.mota.visitme.visitmesecurity.models.Visit;
 import gil.mota.visitme.visitmesecurity.services.NotificationExtender;
 import gil.mota.visitme.visitmesecurity.utils.Functions;
-import gil.mota.visitme.visitmesecurity.views.activities.UnexpectedVisitorActivity;
+import gil.mota.visitme.visitmesecurity.views.activities.VisitAccessActivity;
 
 /**
  * Created by mota on 18/4/2018.
@@ -63,17 +53,17 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
         if (notification != null && !auth.isEmpty())
         {
             String type = notification.getString("type");
-            if (type.equals("UNEXPECTED_VISITOR"))
-                onUnexpectedVisitor(notification);
+            if (type.equals("VISIT ACCESS"))
+                onVisitAccess(notification);
             else
                 displayNotification(notification);
         }
         return true;
     }
 
-    private void onUnexpectedVisitor(JSONObject notification)
+    private void onVisitAccess(JSONObject notification)
     {
-        Intent notifyIntent = new Intent(context, UnexpectedVisitorActivity.class);
+        Intent notifyIntent = new Intent(context, VisitAccessActivity.class);
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notifyIntent.putExtra("data",notification.toString());
         context.startActivity(notifyIntent);
