@@ -23,15 +23,17 @@
                 android:padding="15dp">
 
                 <TextView
+                    android:id="@+id/access_text"
                     style="@style/VisitMeButtonText"
-                    android:textSize="22sp"
-                    android:gravity="center"
-                    android:layout_margin="4dp"
-                    android:text="Acceso de Entrada concedido a"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="Acceso de Entrada concedido a"
+                    android:textSize="22sp" />
 
                 <LinearLayout
+                    android:id="@+id/guest_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -42,30 +44,34 @@
                         android:layout_height="125dp"
                         android:padding="10dp"
                         android:src='@drawable/guy' />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="5dp">
+
                         <TextView
+                            android:id="@+id/guestName"
                             style="@style/VisitMeButtonText"
-                            android:textSize="18sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:hint="Nombre"
                             android:text="@={viewModel.name}"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/guestIdentification"
                             style="@style/VisitMeButtonText"
-                            android:textSize="18sp"
-                            android:layout_margin="3dp"
-                            android:hint="Numero de Identificacion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.identification}"/>
+                            android:layout_margin="3dp"
+                            android:hint="Numero de Identificacion"
+                            android:text="@={viewModel.identification}"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -80,6 +86,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/resident_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -90,30 +97,34 @@
                         android:layout_height="125dp"
                         android:padding="10dp"
                         android:src='@drawable/guy' />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="5dp">
+
                         <TextView
+                            android:id="@+id/residentName"
                             style="@style/VisitMeButtonText"
-                            android:textSize="18sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:hint="Nombre"
                             android:text="@={viewModel.residentName}"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/residentIdentification"
                             style="@style/VisitMeButtonText"
-                            android:textSize="18sp"
-                            android:layout_margin="3dp"
-                            android:hint="Numero de Identificacion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@={viewModel.residentDetail}"/>
+                            android:layout_margin="3dp"
+                            android:hint="Numero de Identificacion"
+                            android:text="@={viewModel.residentDetail}"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </LinearLayout>
