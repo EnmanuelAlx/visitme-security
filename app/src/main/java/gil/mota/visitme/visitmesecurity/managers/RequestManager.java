@@ -26,10 +26,11 @@ import gil.mota.visitme.visitmesecurity.utils.SingletonRequester;
 
 public class RequestManager {
     private static RequestManager instance;
-    private String urlBase;
+    private String url, urlApi;
 
     private RequestManager() {
-        urlBase = "https://visitme1.herokuapp.com/api";
+        url = "http://0988905d.ngrok.io";
+        urlApi = "http://0988905d.ngrok.io/api";
     }
 
     public static RequestManager getInstance() {
@@ -93,85 +94,85 @@ public class RequestManager {
 
 
     public Observable<JSONObject> login(JSONObject obj) {
-        return request(Request.Method.POST, urlBase + Urls.LOGIN, obj);
+        return request(Request.Method.POST, urlApi + Urls.LOGIN, obj);
     }
 
     public Observable<JSONObject> register(HashMap<String, String> data, String image) {
         HashMap<String, String> images = new HashMap<>();
         images.put("image", image);
-        return multipartRequest(Request.Method.POST, urlBase + Urls.REGISTER, data, images, null, null);
+        return multipartRequest(Request.Method.POST, urlApi + Urls.REGISTER, data, images, null, null);
     }
 
     public Observable<JSONObject> editProfile(HashMap<String, String> data, String image) {
         HashMap<String, String> images = new HashMap<>();
         if (image != null && !image.isEmpty())
             images.put("image", image);
-        return multipartRequest(Request.Method.PUT, urlBase + Urls.USER_PROFILE, data, images, null, null);
+        return multipartRequest(Request.Method.PUT, urlApi + Urls.USER_PROFILE, data, images, null, null);
     }
 
     public Observable<JSONObject> getScheduledVisits(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_VISITS_SCHEDULED + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_VISITS_SCHEDULED + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> getFrequentVisits(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_VISITS_FREQUENT + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_VISITS_FREQUENT + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> getSporadicVisits(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_VISITS_SPORADIC + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_VISITS_SPORADIC + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> getCommunities() {
-        return request(Request.Method.GET, urlBase + Urls.USER_COMMUNITIES, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_COMMUNITIES, null);
     }
 
 
     public Observable<JSONObject> createAlert(JSONObject params) {
-        return request(Request.Method.POST, urlBase + Urls.CREATE_ALERT, params);
+        return request(Request.Method.POST, urlApi + Urls.CREATE_ALERT, params);
     }
 
     public Observable<JSONObject> addDevice(String device) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("device", device);
-        return request(Request.Method.POST, urlBase + Urls.USER_DEVICES, obj);
+        return request(Request.Method.POST, urlApi + Urls.USER_DEVICES, obj);
     }
 
     public Observable<JSONObject> removeDevice(String device) {
-        return request(Request.Method.DELETE, urlBase + Urls.USER_DEVICES + "/" + device, null);
+        return request(Request.Method.DELETE, urlApi + Urls.USER_DEVICES + "/" + device, null);
     }
 
 
     public Observable<JSONObject> getIncidentAlerts(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_ALERTS_INCIDENT + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_ALERTS_INCIDENT + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> getInformationAlerts(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_ALERTS_INFORMATION + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_ALERTS_INFORMATION + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> getOtherAlerts(int skip, int limit) {
-        return request(Request.Method.GET, urlBase + Urls.USER_ALERTS_OTHER + "?skip=" + skip + "&limit=" + limit, null);
+        return request(Request.Method.GET, urlApi + Urls.USER_ALERTS_OTHER + "?skip=" + skip + "&limit=" + limit, null);
     }
 
     public Observable<JSONObject> createVisit(JSONObject params) {
-        return request(Request.Method.POST, urlBase + Urls.VISITS, params);
+        return request(Request.Method.POST, urlApi + Urls.VISITS, params);
     }
 
     public Observable<JSONObject> deleteVisit(String visit) throws JSONException {
-        return request(Request.Method.DELETE, urlBase + Urls.VISITS + "/" + visit, null);
+        return request(Request.Method.DELETE, urlApi + Urls.VISITS + "/" + visit, null);
     }
 
     public Observable<JSONObject> forgotPassword(String email) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("email", email);
-        return request(Request.Method.POST, urlBase + Urls.FORGOT_PASSWORD, obj);
+        return request(Request.Method.POST, urlApi + Urls.FORGOT_PASSWORD, obj);
     }
 
     public Observable<JSONObject> sendPasswordCode(String code, String email) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("email", email);
         obj.put("code", code);
-        return request(Request.Method.POST, urlBase + Urls.FORGOT_PASSWORD_CODE, obj);
+        return request(Request.Method.POST, urlApi + Urls.FORGOT_PASSWORD_CODE, obj);
     }
 
     public Observable<JSONObject> changePassword(String password, String email, String code) throws JSONException {
@@ -179,19 +180,19 @@ public class RequestManager {
         obj.put("email", email);
         obj.put("password", password);
         obj.put("code", code);
-        return request(Request.Method.POST, urlBase + Urls.CHANGE_PASSWORD, obj);
+        return request(Request.Method.POST, urlApi + Urls.CHANGE_PASSWORD, obj);
     }
 
     public Observable<JSONObject> getCompanies(String query) {
-        return request(Request.Method.GET, urlBase + Urls.COMPANIES + "?query=" + query, null);
+        return request(Request.Method.GET, urlApi + Urls.COMPANIES + "?query=" + query, null);
     }
 
     public String getUrl() {
-        return "https://visitme1.herokuapp.com";
+        return url;
     }
 
     public Observable<JSONObject> editVisit(String visitId, JSONObject params) {
-        return request(Request.Method.PUT, urlBase + Urls.VISITS + "/" + visitId, params);
+        return request(Request.Method.PUT, urlApi + Urls.VISITS + "/" + visitId, params);
     }
 
     public Observable<JSONObject> findGuest(String community, String identification, String email, String name) throws JSONException {
@@ -199,13 +200,13 @@ public class RequestManager {
         obj.put("email", email);
         obj.put("identification", identification);
         obj.put("name", name);
-        return request(Request.Method.POST, urlBase + Urls.FIND_VISITS.replace(":community", community), obj);
+        return request(Request.Method.POST, urlApi + Urls.FIND_VISITS.replace(":community", community), obj);
     }
 
     public Observable<JSONObject> markVisitAsCheck(String visit) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("visit", visit);
-        return request(Request.Method.POST, urlBase + Urls.MARK_VISIT_AS_CHECKED.replace(":visit", visit), obj);
+        return request(Request.Method.POST, urlApi + Urls.MARK_VISIT_AS_CHECKED.replace(":visit", visit), obj);
     }
 
     public Observable<JSONObject> requestAccess(HashMap<String, String> params,
@@ -213,7 +214,7 @@ public class RequestManager {
                                                 String community) {
 
         return multipartRequest(Request.Method.POST,
-                urlBase + Urls.REQUEST_ACCESS.replace(":community", community)
+                urlApi + Urls.REQUEST_ACCESS.replace(":community", community)
                 , params, photos, null, null);
     }
 }

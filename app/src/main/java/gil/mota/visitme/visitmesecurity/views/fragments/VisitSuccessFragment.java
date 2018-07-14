@@ -49,12 +49,12 @@ public class VisitSuccessFragment extends Fragment implements VisitSuccessViewMo
 
     @Override
     public void changeImageGuest(String url) {
-        Glide.with(getActivity()).load(url).placeholder(R.drawable.guy).error(R.drawable.guy).into(binding.guestImage);
+        Glide.with(getActivity()).load(url).placeholder(R.drawable.guy).error(R.drawable.guy).dontAnimate().into(binding.guestImage);
     }
 
     @Override
     public void changeImageResident(String url) {
-        Glide.with(getActivity()).load(url).placeholder(R.drawable.guy).error(R.drawable.guy).into(binding.residentImage);
+        Glide.with(getActivity()).load(url).placeholder(R.drawable.guy).error(R.drawable.guy).dontAnimate().into(binding.residentImage);
     }
 
     @Override

@@ -77,8 +77,8 @@ public class VisitAccessActivity extends AppCompatActivity implements View.OnCli
             guestName.setText(guest.getName());
             guestIdentification.setText(guest.getIdentification());
 
-            Glide.with(this).load(resident.getImage()).placeholder(R.drawable.guy).error(R.drawable.guy).into(residentImage);
-            Glide.with(this).load(guest.getImage()).placeholder(R.drawable.guy).error(R.drawable.guy).into(guestImage);
+            Glide.with(this).load(resident.getImage()).dontAnimate().placeholder(R.drawable.guy).error(R.drawable.guy).into(residentImage);
+            Glide.with(this).load(guest.getImage()).dontAnimate().placeholder(R.drawable.guy).error(R.drawable.guy).into(guestImage);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -71,7 +71,7 @@ public class RegisterActivity extends BindeableActivity implements RegisterViewM
 
     @Override
     public void changeImage(String image) {
-        Glide.with(this).load(image).placeholder(R.drawable.guy)
+        Glide.with(this).load(image).placeholder(R.drawable.guy).dontAnimate()
                 .error(R.drawable.guy).into(binding.profileImage);
     }
 
@@ -93,7 +93,7 @@ public class RegisterActivity extends BindeableActivity implements RegisterViewM
             if (u != null) {
                 image = u.getPath();
 
-                Glide.with(this).load(u).into(binding.profileImage);
+                Glide.with(this).load(u).dontAnimate().into(binding.profileImage);
                 viewModel.changeImage(u);
 
             }

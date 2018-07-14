@@ -128,15 +128,16 @@ public class RegisterViewModel extends Observable implements UseCase.Result {
             return;
         }
 
-
-        editProfile.setParams(
-                cedula.get().isEmpty() ? null : cedula.get(),
-                name.get().isEmpty() ? null : name.get(),
-                email.get().isEmpty() ? null : email.get(),
-                password.get().isEmpty() ? null : password.get(),
-                cellPhone.get().isEmpty() ? null : cellPhone.get(),
-                homePhone.get().isEmpty() ? null : homePhone.get(),
-                "");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            editProfile.setParams(
+                    cedula.get().isEmpty() ? null : cedula.get(),
+                    name.get().isEmpty() ? null : name.get(),
+                    email.get().isEmpty() ? null : email.get(),
+                    password.get().isEmpty() ? null : password.get(),
+                    cellPhone.get().isEmpty() ? null : cellPhone.get(),
+                    homePhone.get().isEmpty() ? null : homePhone.get(),
+                    FilePath.getPath(context, imageSelected));
+        }
         editProfile.run();
 
 
