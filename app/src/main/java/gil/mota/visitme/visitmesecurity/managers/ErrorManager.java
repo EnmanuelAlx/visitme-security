@@ -34,8 +34,8 @@ public class ErrorManager
 
     public Throwable getError(JSONObject jsonObject)
     {
-        if (jsonObject.has("error"))
-            return new Error(ErrorType.CUSTOM,jsonObject.optString("error"));
+        if (jsonObject.has("status"))
+            return new Error(ErrorType.CUSTOM,jsonObject.optString("name"), jsonObject.optInt("status"));
         else
             return new Throwable("Error Desconocido");
     }
@@ -43,15 +43,21 @@ public class ErrorManager
     public class Error extends Throwable
     {
         ErrorType type;
-        public Error(ErrorType type, String message)
+        int status;
+        public Error(ErrorType type, String message, int status)
         {
             super(message);
             this.type = type;
+            this.status = status;
         }
 
         public ErrorType getType()
         {
             return type;
+        }
+
+        public int getStatus() {
+            return status;
         }
     }
 }

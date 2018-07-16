@@ -29,8 +29,8 @@ public class RequestManager {
     private String url, urlApi;
 
     private RequestManager() {
-        url = "http://0988905d.ngrok.io";
-        urlApi = "http://0988905d.ngrok.io/api";
+        url = " http://51291386.ngrok.io";
+        urlApi = " http://51291386.ngrok.io/api";
     }
 
     public static RequestManager getInstance() {
@@ -215,6 +215,15 @@ public class RequestManager {
 
         return multipartRequest(Request.Method.POST,
                 urlApi + Urls.REQUEST_ACCESS.replace(":community", community)
+                , params, photos, null, null);
+    }
+
+    public Observable<JSONObject> giveAccess(HashMap<String, String> params,
+                                                HashMap<String, String> photos,
+                                                String community) {
+
+        return multipartRequest(Request.Method.POST,
+                urlApi + Urls.GIVE_ACCESS.replace(":community", community)
                 , params, photos, null, null);
     }
 }

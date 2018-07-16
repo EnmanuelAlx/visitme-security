@@ -48,9 +48,20 @@ public class Functions {
                 .setPositiveButton("Si", okListener)
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         dialog.cancel();
                     }
                 });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public static void showAskDialog(Context context, String title, DialogInterface.OnClickListener onYes, DialogInterface.OnClickListener onNo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(title)
+                .setCancelable(false)
+                .setPositiveButton("Si", onYes)
+                .setNegativeButton("No", onNo);
         AlertDialog alert = builder.create();
         alert.show();
     }

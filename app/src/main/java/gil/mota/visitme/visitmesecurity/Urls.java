@@ -26,4 +26,5 @@ public class Urls
     public static final String FIND_VISITS = "/communities/:community/shouldEnter";
     public static final String MARK_VISIT_AS_CHECKED = VISITS + "/:visit/checkIn";
     public static final String REQUEST_ACCESS = "/communities/:community/requestAccess";
+    public static final String GIVE_ACCESS = "/communities/:community/giveAccessBySecurity";
 }

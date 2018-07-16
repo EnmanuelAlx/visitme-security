@@ -80,7 +80,7 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     @Override
     public void close() {
         if (pager != null) {
-            Pnotify.makeText(MyApplication.getInstance(),"Solicitud Enviada satisfactoriamente, en espera de respuesta", Toast.LENGTH_SHORT, Pnotify.INFO).show();
+            Pnotify.makeText(MyApplication.getInstance(),"Solicitud Enviada satisfactoriamente", Toast.LENGTH_SHORT, Pnotify.INFO).show();
             pager.changePage(0);
         }
     }
@@ -89,6 +89,11 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     public void showPictureSelector() {
         Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, SELECT_MULTIPLE_IMAGES);
+    }
+
+    @Override
+    public void askIfGiveAccess(DialogInterface.OnClickListener yes, DialogInterface.OnClickListener no) {
+        Functions.showAskDialog(getActivity(), "El Residente no posee aplicacion o no esta disponible para responder, ¿Desea conceder el acceso a este visitante?", yes, no);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package gil.mota.visitme.visitmesecurity.useCases;
 
 import android.databinding.ObservableField;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
 
+import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 import gil.mota.visitme.visitmesecurity.managers.RequestManager;
 import gil.mota.visitme.visitmesecurity.managers.UserManager;
 import gil.mota.visitme.visitmesecurity.models.Community;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,11 +25,15 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
 
     private HashMap<String, String> params;
     private HashMap<String, String> photos;
+    private boolean requestOrGive; // true for request false for give
+    private Result result;
 
     public RequestAccess(Result result) {
         super(result);
+        this.result = result;
         params = new HashMap<>();
         photos = new HashMap<>();
+        requestOrGive = true;
     }
 
     @Override
@@ -34,7 +41,9 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
         Community def = null;
         try {
             def = UserManager.getInstance().getDefaultCommunity();
-            RequestManager.getInstance().requestAccess(params, photos, def.get_id())
+            Observable<JSONObject> observable = requestOrGive ?
+                    RequestManager.getInstance().requestAccess(params, photos, def.get_id()) : RequestManager.getInstance().giveAccess(params, photos, def.get_id());
+            observable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);
@@ -57,17 +66,32 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
 
     @Override
     public void onNext(JSONObject jsonObject) {
-        resultSetter.onSuccess();
+        result.onSuccess();
     }
 
     @Override
     public void onError(Throwable e) {
-        resultSetter.onError(e.getMessage());
+        try {
+            ErrorManager.Error error = (ErrorManager.Error) e;
+            if (error.getStatus() == 404 && requestOrGive) {
+                result.onResidentNotFound();
+                return;
+            }
+
+
+        } catch (Exception ex) {
+
+        }
+        result.onError(e.getMessage());
     }
 
     @Override
     public void onComplete() {
 
+    }
+
+    public void changeToGive() {
+        requestOrGive = false;
     }
 
     public void setPhotos(ArrayList<File> photos) {
@@ -77,5 +101,14 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
             this.photos.put("" + i, photo.getAbsolutePath());
             i++;
         }
+    }
+
+    public void reset() {
+        requestOrGive = true;
+
+    }
+
+    public interface Result extends UseCase.Result {
+        void onResidentNotFound();
     }
 }
