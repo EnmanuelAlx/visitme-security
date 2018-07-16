@@ -3,10 +3,15 @@ package gil.mota.visitme.visitmesecurity.views.dialogs;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 
@@ -26,6 +31,25 @@ public class SelectCommunityDialog {
     private ArrayAdapter<Community> communityAdapter;
     private String[] types = {"INCIDENT", "INFORMATION"};
     private boolean cancelable;
+    private ImageView communityLogo;
+    private AdapterView.OnItemSelectedListener onSelectCommunity = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            changeImageOnCommunitySelected();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
+
+
+    private void changeImageOnCommunitySelected() {
+        Log.i("CHANGE !!!","CHANN");
+        Community c = communities.get(community.getSelectedItemPosition());
+        Glide.with(context).load(c.getImage()).placeholder(R.drawable.house).error(R.drawable.house).into(communityLogo);
+    }
 
     public SelectCommunityDialog(Context contxt, Result result, List<Community> communities, boolean cancelable) {
         this.context = contxt;
@@ -65,13 +89,15 @@ public class SelectCommunityDialog {
                 });
             }
         });
-
+        Glide.with(context).load(communities.get(0).getImage()).placeholder(R.drawable.house).error(R.drawable.house).into(communityLogo);
         d.show();
     }
 
 
     private void fillSpinners(View view) {
         community = view.findViewById(R.id.community);
+        communityLogo = view.findViewById(R.id.communityLogo);
+        community.setOnItemSelectedListener(onSelectCommunity);
         communityAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, communities);
         communityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         community.setAdapter(communityAdapter);
