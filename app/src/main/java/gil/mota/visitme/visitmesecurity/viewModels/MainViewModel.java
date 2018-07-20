@@ -31,13 +31,14 @@ import gil.mota.visitme.visitmesecurity.views.dialogs.SelectCommunityDialog;
 public class MainViewModel extends Observable implements DialogInterface.OnClickListener, CreateAlertDialog.Result, SelectCommunityDialog.Result {
 
 
-
     private Context context;
     private SignOut signOut;
     private GetCommunities getCommunities;
     private CreateAlert createAlert;
     private ObservableField<Boolean> showCommunitySelector;
+    public ObservableField<String> communityName;
     private Contract contract;
+
     public MainViewModel(@NonNull Context context, Contract contract) {
         this.context = context;
         signOut = new SignOut(context);
@@ -45,20 +46,20 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
         getCommunities.run();
         createAlert = new CreateAlert(createAlertResult);
         showCommunitySelector = new ObservableField<>(false);
+        communityName = new ObservableField<>("");
         this.contract = contract;
     }
 
     public void signOut() {
-        Functions.showAskDialog(context,"¿Esta seguro que desea terminar su sesion?",this);
+        Functions.showAskDialog(context, "¿Esta seguro que desea terminar su sesion?", this);
     }
 
     public void createAlert(View view) {
-        CreateAlertDialog dialog = new CreateAlertDialog(context,this);
+        CreateAlertDialog dialog = new CreateAlertDialog(context, this);
         dialog.show();
     }
 
-    public void changeCommunity(View view)
-    {
+    public void changeCommunity(View view) {
         try {
             List<Community> communities = UserManager.getInstance().getCommunities();
             showSelectCommunity(communities, true);
@@ -95,10 +96,11 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
 
                 List<Community> communities = UserManager.getInstance().getCommunities();
                 showCommunitySelector.set(communities.size() > 1);
-                if(showCommunitySelector.get())
+                if (showCommunitySelector.get())
                     showSelectCommunity(communities, false);
-                else
+                else if (communities.size() == 1)
                     UserManager.getInstance().setDefaultCommunity(communities.get(0));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -107,7 +109,7 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
     };
 
     private void showSelectCommunity(List<Community> communities, boolean cancelable) {
-        SelectCommunityDialog dialog = new SelectCommunityDialog(context,this, communities, cancelable);
+        SelectCommunityDialog dialog = new SelectCommunityDialog(context, this, communities, cancelable);
         dialog.show();
     }
 
@@ -115,7 +117,8 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
     public void onSelectCommunity(Community community) {
         try {
             UserManager.getInstance().setDefaultCommunity(community);
-            Pnotify.makeText(context,"Comunidad Seleccionada Satisfactoriamente", Toast.LENGTH_SHORT, Pnotify.INFO).show();
+            communityName.set(community.getName());
+            Pnotify.makeText(context, "Comunidad Seleccionada Satisfactoriamente", Toast.LENGTH_SHORT, Pnotify.INFO).show();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -124,18 +127,19 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
 
     public interface Contract {
         void createVisit();
+
         void updateAlerts();
     }
 
     private final UseCase.Result createAlertResult = new UseCase.Result() {
         @Override
         public void onError(String error) {
-            Pnotify.makeText(context,error, Toast.LENGTH_SHORT, Pnotify.ERROR).show();
+            Pnotify.makeText(context, error, Toast.LENGTH_SHORT, Pnotify.ERROR).show();
         }
 
         @Override
         public void onSuccess() {
-            Pnotify.makeText(context,"Creacion Satisfactoria", Toast.LENGTH_SHORT, Pnotify.INFO).show();
+            Pnotify.makeText(context, "Creacion Satisfactoria", Toast.LENGTH_SHORT, Pnotify.INFO).show();
         }
 
 

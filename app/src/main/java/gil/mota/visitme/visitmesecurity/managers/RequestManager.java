@@ -29,8 +29,8 @@ public class RequestManager {
     private String url, urlApi;
 
     private RequestManager() {
-        url = " http://51291386.ngrok.io";
-        urlApi = " http://51291386.ngrok.io/api";
+        url = "http://dd01139a.ngrok.io";
+        urlApi = "http://dd01139a.ngrok.io/api";
     }
 
     public static RequestManager getInstance() {
