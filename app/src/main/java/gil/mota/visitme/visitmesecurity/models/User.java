@@ -108,7 +108,7 @@ public class User implements Parcelable{
     }
 
     public String getImage() {
-        return RequestManager.getInstance().getUrl() + "/" + image;
+        return image;
     }
 
     @Override
