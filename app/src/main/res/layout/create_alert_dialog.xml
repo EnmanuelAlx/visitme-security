@@ -18,14 +18,6 @@
         android:text="Antes de emitir una alerta, verifica que la informacion sea correcta; evitando dar falsos testimonios."    />
 
     <fr.ganfra.materialspinner.MaterialSpinner
-        android:id="@+id/community"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ms_enableFloatingLabel="false"
-        app:ms_hint="Selecciona la comunidad"
-        />
-
-    <fr.ganfra.materialspinner.MaterialSpinner
         android:id="@+id/type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

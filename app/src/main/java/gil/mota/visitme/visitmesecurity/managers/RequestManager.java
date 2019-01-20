@@ -195,11 +195,12 @@ public class RequestManager {
         return request(Request.Method.PUT, urlApi + Urls.VISITS + "/" + visitId, params);
     }
 
-    public Observable<JSONObject> findGuest(String community, String identification, String email, String name) throws JSONException {
+    public Observable<JSONObject> findGuest(String community, String identification, String email, String name, String token) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("email", email);
         obj.put("identification", identification);
         obj.put("name", name);
+        obj.put("token", token);
         return request(Request.Method.POST, urlApi + Urls.FIND_VISITS.replace(":community", community), obj);
     }
 
@@ -219,8 +220,8 @@ public class RequestManager {
     }
 
     public Observable<JSONObject> giveAccess(HashMap<String, String> params,
-                                                HashMap<String, String> photos,
-                                                String community) {
+                                             HashMap<String, String> photos,
+                                             String community) {
 
         return multipartRequest(Request.Method.POST,
                 urlApi + Urls.GIVE_ACCESS.replace(":community", community)

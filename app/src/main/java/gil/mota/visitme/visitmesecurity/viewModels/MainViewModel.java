@@ -55,8 +55,14 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
     }
 
     public void createAlert(View view) {
-        CreateAlertDialog dialog = new CreateAlertDialog(context, this);
-        dialog.show();
+        Community community = null;
+        try {
+            community = UserManager.getInstance().getDefaultCommunity();
+            CreateAlertDialog dialog = new CreateAlertDialog(context, community, this);
+            dialog.show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void changeCommunity(View view) {

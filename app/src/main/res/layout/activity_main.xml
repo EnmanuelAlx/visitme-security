@@ -46,14 +46,14 @@
                     android:textAlignment="center"
                     android:text="@{viewModel.communityName}"/>
             </LinearLayout>
-
+            <!--
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:onClick="@{viewModel::changeCommunity}"
                 android:src="@drawable/add"
-                android:visibility="visible" />
+                android:visibility="visible" /> -->
         </LinearLayout>
 
         <android.support.v4.view.ViewPager

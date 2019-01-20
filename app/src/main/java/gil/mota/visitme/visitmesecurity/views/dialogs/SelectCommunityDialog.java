@@ -29,7 +29,6 @@ public class SelectCommunityDialog {
     private List<Community> communities;
     private MaterialSpinner community;
     private ArrayAdapter<Community> communityAdapter;
-    private String[] types = {"INCIDENT", "INFORMATION"};
     private boolean cancelable;
     private ImageView communityLogo;
     private AdapterView.OnItemSelectedListener onSelectCommunity = new AdapterView.OnItemSelectedListener() {
@@ -46,7 +45,6 @@ public class SelectCommunityDialog {
 
 
     private void changeImageOnCommunitySelected() {
-        Log.i("CHANGE !!!","CHANN");
         Community c = communities.get(community.getSelectedItemPosition());
         Glide.with(context).load(c.getImage()).placeholder(R.drawable.house).error(R.drawable.house).into(communityLogo);
     }

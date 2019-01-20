@@ -20,7 +20,7 @@ import gil.mota.visitme.visitmesecurity.useCases.UseCase;
 public class VisitsViewModel extends Observable implements  FindGuest.Result {
 
 
-    public ObservableField<String> identification, email, name;
+    public ObservableField<String> identification, email, name, token;
     public FindGuest findGuest;
     private Contract contract;
     public VisitsViewModel(Contract contract) {
@@ -28,12 +28,13 @@ public class VisitsViewModel extends Observable implements  FindGuest.Result {
         email = new ObservableField<>("");
         findGuest = new FindGuest(this);
         name = new ObservableField<>("");
+        token = new ObservableField<>("");
         this.contract = contract;
     }
 
 
     public void find(View view){
-        findGuest.setParams(identification.get(), email.get(), name.get());
+        findGuest.setParams(identification.get(), email.get(), name.get(), token.get());
         findGuest.run();
     }
 

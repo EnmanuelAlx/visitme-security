@@ -1,7 +1,5 @@
 package gil.mota.visitme.visitmesecurity.useCases;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,6 +20,7 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
     private Result result;
     private Visit visit;
     private String name;
+    private String token;
 
     public FindGuest(Result result) {
         super(null);
@@ -32,7 +31,7 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
     public void run() {
         try {
             Community def = UserManager.getInstance().getDefaultCommunity();
-            RequestManager.getInstance().findGuest(def.get_id(),identification, email, name)
+            RequestManager.getInstance().findGuest(def.get_id(),identification, email, name, token)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);
@@ -79,10 +78,11 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     }
 
-    public void setParams(String identification, String email, String name) {
+    public void setParams(String identification, String email, String name, String token) {
         this.identification = identification;
         this.email = email;
         this.name = name;
+        this.token = token;
     }
 
     @Override
