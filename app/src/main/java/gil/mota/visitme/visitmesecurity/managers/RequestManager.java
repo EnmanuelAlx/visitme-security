@@ -29,8 +29,8 @@ public class RequestManager {
     private String url, urlApi;
 
     private RequestManager() {
-        url = "https://visitme1.herokuapp.com";
-        urlApi = "https://visitme1.herokuapp.com/api";
+        url = "http://visitme.southcentralus.cloudapp.azure.com:3001";
+        urlApi = "http://visitme.southcentralus.cloudapp.azure.com:3001/api";
     }
 
     public static RequestManager getInstance() {
