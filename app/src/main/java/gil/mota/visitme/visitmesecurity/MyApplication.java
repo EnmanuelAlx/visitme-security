@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.multidex.MultiDex;
 
 import com.onesignal.OneSignal;
 
@@ -30,6 +31,12 @@ public class MyApplication extends android.app.Application
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(NotificationManager.getInstance())
                 .init();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static MyApplication getInstance() {
