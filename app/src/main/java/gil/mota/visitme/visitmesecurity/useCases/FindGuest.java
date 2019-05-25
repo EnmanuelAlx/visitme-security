@@ -1,8 +1,10 @@
 package gil.mota.visitme.visitmesecurity.useCases;
 
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 import gil.mota.visitme.visitmesecurity.managers.RequestManager;
 import gil.mota.visitme.visitmesecurity.managers.UserManager;
 import gil.mota.visitme.visitmesecurity.models.Community;
@@ -13,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.Result {
+public class FindGuest extends UseCase implements Observer<JSONObject>, UseCase.Result {
 
     private String identification;
     private String email;
@@ -31,7 +33,7 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
     public void run() {
         try {
             Community def = UserManager.getInstance().getDefaultCommunity();
-            RequestManager.getInstance().findGuest(def.get_id(),identification, email, name, token)
+            RequestManager.getInstance().findGuest(def.get_id(), identification, email, name, token)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this);
@@ -48,12 +50,10 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     @Override
     public void onNext(JSONObject obj) {
-        if(obj.has("id"))
-        {
+        if (obj.has("id")) {
             markVisitAsChecked(obj);
             this.visit = Functions.parse(obj, Visit.class);
-        }
-        else
+        } else
             result.onNotSuccess();
     }
 
@@ -70,6 +70,15 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     @Override
     public void onError(Throwable e) {
+        try{
+            ErrorManager.Error error = (ErrorManager.Error)e;
+            if (error.getStatus() == HttpStatus.SC_NOT_FOUND){
+                result.onNotSuccess();
+                return;
+            }
+        }catch (ClassCastException ignored){
+
+        }
         result.onError();
     }
 
@@ -97,7 +106,9 @@ public class FindGuest extends UseCase implements Observer<JSONObject>,UseCase.R
 
     public interface Result {
         void onSuccess(Visit visit);
+
         void onNotSuccess();
+
         void onError();
     }
 }
