@@ -1,15 +1,12 @@
 package gil.mota.visitme.visitmesecurity.useCases;
 
-import android.databinding.ObservableField;
-import android.util.Log;
-
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Function;
 
 import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 import gil.mota.visitme.visitmesecurity.managers.RequestManager;
@@ -73,8 +70,8 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
     public void onError(Throwable e) {
         try {
             ErrorManager.Error error = (ErrorManager.Error) e;
-            if (error.getStatus() == 404 && requestOrGive) {
-                result.onResidentNotFound();
+            if (error.getStatus() == HttpStatus.SC_PRECONDITION_FAILED && requestOrGive) {
+                result.onResidentDeviceNotFound();
                 return;
             }
 
@@ -109,6 +106,6 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
     }
 
     public interface Result extends UseCase.Result {
-        void onResidentNotFound();
+        void onResidentDeviceNotFound();
     }
 }

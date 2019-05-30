@@ -86,7 +86,7 @@ public class UnexpectedVisitViewModel extends Observable implements RequestAcces
     }
 
     @Override
-    public void onResidentNotFound() {
+    public void onResidentDeviceNotFound() {
         requestAccess.changeToGive();
         contract.askIfGiveAccess(giveAccessListener, noAccessListener);
     }
