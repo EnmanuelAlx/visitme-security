@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -30,7 +28,6 @@ import gil.mota.visitme.visitmesecurity.utils.FragmentPager;
 import gil.mota.visitme.visitmesecurity.utils.Functions;
 import gil.mota.visitme.visitmesecurity.utils.Pnotify;
 import gil.mota.visitme.visitmesecurity.viewModels.UnexpectedVisitViewModel;
-import gil.mota.visitme.visitmesecurity.views.adapters.PageAdapter;
 import gil.mota.visitme.visitmesecurity.views.adapters.PhotoAdapter;
 
 /**
@@ -80,14 +77,14 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     @Override
     public void close() {
         if (pager != null) {
-            Pnotify.makeText(MyApplication.getInstance(),"Solicitud Enviada satisfactoriamente", Toast.LENGTH_SHORT, Pnotify.INFO).show();
+            Pnotify.makeText(MyApplication.getInstance(), "Solicitud Enviada satisfactoriamente", Toast.LENGTH_SHORT, Pnotify.INFO).show();
             pager.changePage(0);
         }
     }
 
     @Override
     public void showPictureSelector() {
-        Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, SELECT_MULTIPLE_IMAGES);
     }
 
@@ -103,7 +100,7 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
 
     @Override
     public void onError(String error) {
-        Pnotify.makeText(getActivity(),error, Toast.LENGTH_SHORT, Pnotify.ERROR).show();
+        Pnotify.makeText(getActivity(), error, Toast.LENGTH_SHORT, Pnotify.ERROR).show();
     }
 
     @Override
@@ -113,16 +110,23 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("GET PHOTO",""+data.toString());
-        saveImage(data);
-        Functions.showAskDialog(getActivity(),"¿Desea tomar otra foto?", this);
+        Log.i("GET PHOTO", "" + data.toString());
+        if (saveImage(data))
+            Functions.showAskDialog(getActivity(), "¿Desea tomar otra foto?", this);
     }
 
-    private void saveImage(Intent data) {
+    private boolean saveImage(Intent data) {
         Bitmap photo = (Bitmap) data.getExtras().get("data");
         Uri tempUri = getImageUri(MyApplication.getInstance(), photo);
+
+        if (tempUri == null) {
+            onError("La Aplicacion no tiene permisos para guardar imagenes");
+            return false;
+        }
+
         File finalFile = new File(getRealPathFromURI(tempUri));
         viewModel.addPhotoToList(finalFile);
+        return true;
     }
 
     @Override
@@ -131,10 +135,14 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+            return Uri.parse(path);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getRealPathFromURI(Uri uri) {

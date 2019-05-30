@@ -35,7 +35,7 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
 
     @Override
     public void run() {
-        Community def = null;
+        Community def;
         try {
             def = UserManager.getInstance().getDefaultCommunity();
             Observable<JSONObject> observable = requestOrGive ?
