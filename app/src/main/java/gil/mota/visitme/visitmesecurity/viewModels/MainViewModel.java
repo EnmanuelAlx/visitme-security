@@ -105,7 +105,7 @@ public class MainViewModel extends Observable implements DialogInterface.OnClick
                 if (showCommunitySelector.get())
                     showSelectCommunity(communities, false);
                 else if (communities.size() == 1)
-                    UserManager.getInstance().setDefaultCommunity(communities.get(0));
+                    onSelectCommunity(communities.get(0));
 
             } catch (JSONException e) {
                 e.printStackTrace();

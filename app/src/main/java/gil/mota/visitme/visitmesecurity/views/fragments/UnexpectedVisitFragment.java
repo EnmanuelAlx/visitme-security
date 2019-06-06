@@ -51,8 +51,6 @@ public class UnexpectedVisitFragment extends Fragment implements UnexpectedVisit
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_unexpected_visit, container, false);
         viewModel = new UnexpectedVisitViewModel(this);
         binding.setViewModel(viewModel);

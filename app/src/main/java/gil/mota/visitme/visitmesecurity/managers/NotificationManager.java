@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.onesignal.NotificationExtenderService;
+import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationOpenResult;
-import com.onesignal.OSNotificationReceivedResult;
 import com.onesignal.OneSignal;
 
 import org.json.JSONException;
@@ -22,7 +22,7 @@ import gil.mota.visitme.visitmesecurity.views.activities.VisitAccessActivity;
  * Created by mota on 18/4/2018.
  */
 
-public class NotificationManager implements OneSignal.NotificationOpenedHandler {
+public class NotificationManager implements OneSignal.NotificationOpenedHandler, OneSignal.NotificationReceivedHandler {
     private static NotificationManager instance;
     private Context context;
     private NotificationExtender extender;
@@ -47,12 +47,10 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
 
     }
 
-    public boolean onNewNotification(OSNotificationReceivedResult result) throws JSONException {
-        JSONObject notification = result.payload.additionalData;
+    public boolean onNewNotification(JSONObject notification) throws JSONException {
         String auth = UserManager.getInstance().getAuth();
-        if (notification != null && !auth.isEmpty())
-        {
-            String type = notification.getString("type");
+        if (notification != null && !auth.isEmpty()) {
+            String type = notification.optString("type", "");
             if (type.equals("VISIT ACCESS"))
                 onVisitAccess(notification);
             else
@@ -61,11 +59,10 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
         return true;
     }
 
-    private void onVisitAccess(JSONObject notification)
-    {
+    private void onVisitAccess(JSONObject notification) {
         Intent notifyIntent = new Intent(context, VisitAccessActivity.class);
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        notifyIntent.putExtra("data",notification.toString());
+        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notifyIntent.putExtra("data", notification.toString());
         context.startActivity(notifyIntent);
     }
 
@@ -80,10 +77,9 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
     }
 
     private NotificationCompat.Extender buildByNotificationType(JSONObject notification) throws JSONException {
-        String type = notification.getString("type");
+        String type = notification.optString("type");
         JSONObject data = notification.getJSONObject("data");
-        switch (type)
-        {
+        switch (type) {
             case "ALERT":
                 return buildAlert(data);
             case "VISIT_ARRIVE":
@@ -96,7 +92,7 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
 
     private NotificationCompat.Extender buildInvitation(JSONObject data) throws JSONException {
         final Visit v = Functions.parse(data, Visit.class);
-         return new NotificationCompat.Extender() {
+        return new NotificationCompat.Extender() {
             @Override
             public NotificationCompat.Builder extend(NotificationCompat.Builder builder) {
                 return builder.setContentTitle("Tu visita ya ha sido programada")
@@ -135,5 +131,15 @@ public class NotificationManager implements OneSignal.NotificationOpenedHandler 
                         .setSmallIcon(R.drawable.hashtag);
             }
         };
+    }
+
+    @Override
+    public void notificationReceived(OSNotification notification) {
+        System.out.println("HEY:" + notification.payload);
+        try {
+            this.onNewNotification(notification.payload.additionalData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

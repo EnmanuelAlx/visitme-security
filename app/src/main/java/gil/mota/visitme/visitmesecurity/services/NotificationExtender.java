@@ -4,7 +4,6 @@ package gil.mota.visitme.visitmesecurity.services;
  * Created by mota on 18/4/2018.
  */
 
-import com.onesignal.OSNotificationPayload;
 import com.onesignal.NotificationExtenderService;
 import com.onesignal.OSNotificationReceivedResult;
 
@@ -23,7 +22,8 @@ public class NotificationExtender extends NotificationExtenderService {
     protected boolean onNotificationProcessing(OSNotificationReceivedResult receivedResult) {
 
         try {
-            return NotificationManager.getInstance().onNewNotification(receivedResult);
+            System.out.println("ON NEW NOTIFICATION:"+receivedResult.payload.additionalData.toString());
+            return NotificationManager.getInstance().onNewNotification(receivedResult.payload.additionalData);
         } catch (JSONException e) {
             e.printStackTrace();
         }

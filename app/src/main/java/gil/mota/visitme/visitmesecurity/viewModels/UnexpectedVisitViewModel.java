@@ -28,6 +28,8 @@ public class UnexpectedVisitViewModel extends Observable implements RequestAcces
             contract.loading(true);
         }
     };
+
+
     private DialogInterface.OnClickListener noAccessListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
