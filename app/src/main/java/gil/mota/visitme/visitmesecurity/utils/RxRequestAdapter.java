@@ -1,7 +1,5 @@
 package gil.mota.visitme.visitmesecurity.utils;
 
-import android.util.Log;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -9,11 +7,11 @@ import org.json.JSONObject;
 
 import java.util.concurrent.CountDownLatch;
 
+import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
-import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 
 /**
  * Created by Slaush on 22/05/2017.
@@ -50,12 +48,13 @@ public class RxRequestAdapter<T> implements Response.Listener<T>, Response.Error
 
     private void handleError(ObservableEmitter<T> e, VolleyError mVolleyError) {
         Throwable error;
+        int status = mVolleyError.networkResponse.statusCode;
         try {
             String data = new String(mVolleyError.networkResponse.data);
             JSONObject obj = new JSONObject(data);
             error = ErrorManager.getInstance().getError(obj);
         } catch (Exception ex) {
-            error = new Throwable("Error inesperado");
+            error = ErrorManager.getInstance().createWithStatus(status);
         }
         e.onError(error);
     }

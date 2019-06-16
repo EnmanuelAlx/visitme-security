@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.onesignal.OneSignal;
 
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import gil.mota.visitme.visitmesecurity.managers.ErrorManager;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -50,7 +52,15 @@ public abstract class Auth extends UseCase implements Observer<JSONObject> {
 
     @Override
     public void onError(Throwable e) {
-        resultSetter.onError(e.getMessage());
+        try {
+            ErrorManager.Error error = (ErrorManager.Error) e;
+            if (error.getStatus() >= HttpStatus.SC_BAD_REQUEST && error.getStatus() < HttpStatus.SC_INTERNAL_SERVER_ERROR)
+                resultSetter.onError("Error en los Parametros de Ingreso");
+            else
+                resultSetter.onError("Error inesperado");
+        } catch (Exception ex) {
+            resultSetter.onError("Error inesperado");
+        }
     }
 
     @Override

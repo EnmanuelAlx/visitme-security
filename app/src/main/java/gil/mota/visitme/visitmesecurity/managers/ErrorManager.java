@@ -1,9 +1,5 @@
 package gil.mota.visitme.visitmesecurity.managers;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.VolleyError;
-
 import org.json.JSONObject;
 
 /**
@@ -38,6 +34,10 @@ public class ErrorManager
             return new Error(ErrorType.CUSTOM,jsonObject.optString("name"), jsonObject.optInt("status"));
         else
             return new Throwable("Error Desconocido");
+    }
+
+    public Throwable createWithStatus(int status) {
+        return new Error(ErrorType.CUSTOM, "Error Inesperado", status);
     }
 
     public class Error extends Throwable
