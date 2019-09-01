@@ -29,8 +29,10 @@ public class RequestManager {
     private String url, urlApi;
 
     private RequestManager() {
-        url = "http://visitme.southcentralus.cloudapp.azure.com:3001";
-        urlApi = "http://visitme.southcentralus.cloudapp.azure.com:3001/api";
+        //url = "http://visitme.southcentralus.cloudapp.azure.com:3001";
+        //urlApi = "http://visitme.southcentralus.cloudapp.azure.com:3001/api";
+        url = "http://192.168.0.104:3000";
+        urlApi = "http://192.168.0.104:3000/api";
     }
 
     public static RequestManager getInstance() {
@@ -208,6 +210,16 @@ public class RequestManager {
         JSONObject obj = new JSONObject();
         obj.put("visit", visit);
         return request(Request.Method.POST, urlApi + Urls.MARK_VISIT_AS_CHECKED.replace(":visit", visit), obj);
+    }
+
+    public Observable<JSONObject> SaveImageToGuest(String visit,
+                                                   HashMap<String, String> photos,
+                                                   HashMap<String, String> params) throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("visit", visit);
+        return multipartRequest(Request.Method.POST,
+                urlApi + Urls.ADD_PHOTO_TO_VISIT.replace(":visit", visit),
+                params , photos, null, null);
     }
 
     public Observable<JSONObject> requestAccess(HashMap<String, String> params,

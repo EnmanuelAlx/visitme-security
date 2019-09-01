@@ -38,12 +38,33 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/guestImage"
-                        android:layout_width="125dp"
-                        android:layout_height="125dp"
-                        android:padding="10dp"
-                        android:src='@drawable/guy' />
+                    <RelativeLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="20dp"
+                        android:onClick="@{viewModel::addPhoto}">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/guestImage"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:src="@drawable/guy"
+                            android:padding="10dp"
+                            android:onClick="@{viewModel::addPhoto}"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/blue_circle"
+                            android:padding="5dp"
+                            android:src="@drawable/camera" />/>
+
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -135,14 +156,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:onClick="@{viewModel::aceptar}"
+                    android:onClick="@{viewModel::requestAccess}"
                     android:text="Aceptar"
 
                     android:textColor="@color/white" />
 
             </LinearLayout>
         </ScrollView>
-
+        <RelativeLayout
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CCFFFFFF"
+            android:visibility="gone"
+            >
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:layout_centerInParent="true"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.CubeGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorAccent" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </layout>
