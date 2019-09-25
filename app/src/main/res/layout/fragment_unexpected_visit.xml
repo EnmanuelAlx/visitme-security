@@ -113,6 +113,14 @@
                     android:hint="Numero de Casa / Oficina"
                     android:text="@={viewModel.residentDetail}" />
 
+                <EditText
+                    style="@style/VisitMeButtonText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:hint="Nota"
+                    android:text="@={viewModel.note}" />
+
                 <Button
                     style="@style/VisitMeButton"
                     android:layout_width="match_parent"

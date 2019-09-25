@@ -17,7 +17,7 @@ import gil.mota.visitme.visitmesecurity.utils.Functions;
 public class UnexpectedVisitViewModel extends Observable implements RequestAccess.Result {
 
     public ObservableField<String> name, identification,
-            residentIdentification, residentDetail;
+            residentIdentification, residentDetail, note;
     private Contract contract;
     private RequestAccess requestAccess;
     private ArrayList<File> photos;
@@ -46,6 +46,7 @@ public class UnexpectedVisitViewModel extends Observable implements RequestAcces
         identification = new ObservableField<>();
         residentIdentification = new ObservableField<>();
         residentDetail = new ObservableField<>();
+        note = new ObservableField<>();
     }
 
     public void addPhoto(View view) {
@@ -54,7 +55,7 @@ public class UnexpectedVisitViewModel extends Observable implements RequestAcces
 
     public void requestAccess(View view) {
         try {
-            requestAccess.setParams(name.get(), identification.get(), residentIdentification.get(), residentDetail.get());
+            requestAccess.setParams(name.get(), identification.get(), residentIdentification.get(), residentDetail.get(), note.get());
             requestAccess.setPhotos(photos);
             requestAccess.run();
             contract.loading(true);

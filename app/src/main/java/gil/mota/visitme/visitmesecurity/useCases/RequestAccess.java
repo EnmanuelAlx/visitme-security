@@ -49,11 +49,12 @@ public class RequestAccess extends UseCase implements Observer<JSONObject> {
         }
     }
 
-    public void setParams(String name, String identification, String residentIdentification, String residentDetail) {
+    public void setParams(String name, String identification, String residentIdentification, String residentDetail, String note) {
         params.put("name", name);
         params.put("identification", identification);
         params.put("residentIdentification", residentIdentification);
         params.put("reference", residentDetail);
+        params.put("note", note);
     }
 
     @Override
