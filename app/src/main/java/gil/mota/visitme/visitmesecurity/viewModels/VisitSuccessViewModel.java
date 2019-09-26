@@ -85,7 +85,9 @@ public class VisitSuccessViewModel extends Observable implements RequestAccess.R
             requestAccess.setPhotos(photos);
             requestAccess.run();
             contract.loading(true);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            onSuccess();
+        } catch(Exception e){
             onError("Ocurrio un error inesperado, intente mas tarde");
         }
     }
