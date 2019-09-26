@@ -29,10 +29,8 @@ public class RequestManager {
     private String url, urlApi;
 
     private RequestManager() {
-        //url = "http://visitme.southcentralus.cloudapp.azure.com:3001";
-        //urlApi = "http://visitme.southcentralus.cloudapp.azure.com:3001/api";
-        url = "http://192.168.0.104:3000";
-        urlApi = "http://192.168.0.104:3000/api";
+        url = "http://visitme.southcentralus.cloudapp.azure.com:3001";
+        urlApi = "http://visitme.southcentralus.cloudapp.azure.com:3001/api";
     }
 
     public static RequestManager getInstance() {
